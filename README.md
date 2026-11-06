@@ -12,7 +12,32 @@
 - `RegWiki_product_detail.html`：银行监管数据报送知识百科。
 - `RegInsights_product_detail.html`：金融外规内化对标分析洞察。
 
-所有图片内嵌在 HTML 中，无需另行上传图片，无需前端依赖或构建命令。各页面使用相对路径，可直接打开首页预览。
+网站无需前端依赖或构建命令。各页面使用相对路径，可直接打开首页预览。图片、双语脚本和样式均位于 `assets/`，部署或复制网站时请一并保留该目录。
+
+## 中英文切换
+
+两个总览入口和七个产品详情页均提供右上角 `EN / CN` 切换，默认中文。切换会同步更新正文、导航、动画标签、暂停/播放按钮、页面标题、描述、无障碍标签和含文字图片。产品名及必要的技术缩写保留。
+
+语言选择保存在浏览器中，站内页面链接也会携带语言。可以使用 `index.html?lang=en` 或 `index.html?lang=cn` 直接分享指定语言；URL 参数优先于已保存的偏好。禁止浏览器存储时，站内导航仍通过 URL 保留语言。
+
+- `assets/locales.js`：共用的中英文文案词典；新增或修改文案时同步维护两种语言。
+- `assets/i18n.js`、`assets/i18n.css`：切换行为与响应式样式，保留原页面的结构和动画交互。
+- `assets/images/green/`：首页及详情页最新的绿色增强图片，共 14 张，保留黑底并增加绿色图表、节点、玻璃棱边和反射。D.FRisk 主图及 RegLens 文档图通过 `data-src-cn` / `data-src-en` 切换中英文；无文字图片两语共用。编辑提示词见该目录的 `README.md`。
+- `assets/green-image-map.json`：原图片与绿色增强资源的对应关系。
+- `assets/image-localization.json`、`assets/image-prompts.md`：图片映射、审查记录及内置 imagegen 的最终编辑提示词。
+
+首页各产品卡片的“试用产品”和详情页的“申请试用”统一打开扫码弹窗，不跳转到真实产品服务。“了解产品”保留详情导航。弹窗支持中英文、关闭按钮、Esc、点击遮罩关闭，并在关闭后恢复焦点和滚动。
+
+弹窗由 `assets/trial-dialog.js` 与 `assets/trial-dialog.css` 共用维护。`assets/trial-qr-reference.png` 是用户提供的原始截图，使用 CSS 仅显示其中的二维码区域，未重新生成二维码。
+
+验证命令（Python 3.9+ 与 Node.js）：
+
+```sh
+python3 tests/check_localization.py
+node --check assets/locales.js
+node --check assets/i18n.js
+node --check assets/trial-dialog.js
+```
 
 ## Zeabur 部署
 
@@ -40,12 +65,12 @@ docker run --rm -p 8080:8080 marketplace
 
 修改总览时，请同步更新 `index.html` 和 `financial_solutions_first_concept.html`；修改详情时保留原文件名，即可继续使用现有导航。
 
-“进入产品体验”按钮链接到外部产品演示服务，其可用性由外部服务决定。附件中 D.FCP 的地址原文末尾为 `netlify anp`，目前暂按 `netlify.app` 整理，正式发布前请核对；RegInsights 能力说明部分存在截断，页面内容依据附件完整概述整理。
+试用申请统一通过扫码弹窗受理。RegInsights 能力说明部分存在截断，页面内容依据附件完整概述整理。
 
 
 ## 新增产品
 
 - AIGovCube：AI治理魔方（AI应用风险评估）。
-- QRiskM：风险量化模型智能体验证平台（英文简称暂定）。
+- D.QRM：风险量化模型智能体验证平台（英文简称暂定）。
 
-两者尚未提供外部体验地址，按钮暂连接站内产品动画。
+两者保留站内产品动画入口，并提供统一的扫码申请试用入口。
