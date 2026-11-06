@@ -41,3 +41,11 @@ docker run --rm -p 8080:8080 marketplace
 修改总览时，请同步更新 `index.html` 和 `financial_solutions_first_concept.html`；修改详情时保留原文件名，即可继续使用现有导航。
 
 “进入产品体验”按钮链接到外部产品演示服务，其可用性由外部服务决定。附件中 D.FCP 的地址原文末尾为 `netlify anp`，目前暂按 `netlify.app` 整理，正式发布前请核对；RegInsights 能力说明部分存在截断，页面内容依据附件完整概述整理。
+
+
+## 新增产品
+
+- AIGovCube：AI治理魔方（AI应用风险评估）。
+- QRiskM：风险量化模型智能体验证平台（英文简称暂定）。
+
+两者尚未提供外部体验地址，按钮暂连接站内产品动画。
